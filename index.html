@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=1440, initial-scale=1" />
+  <title>EP Cross Promote · Mockup</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50:  '#EEF2FF',
+              100: '#E0E7FF',
+              500: '#4F63E6',
+              600: '#3D51D4',
+              700: '#2F40B0',
+            },
+            ink: {
+              900: '#0F172A',
+              700: '#334155',
+              500: '#64748B',
+              300: '#CBD5E1',
+              100: '#F1F5F9',
+            },
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    html, body { background: #F8FAFC; }
+    /* scrollbar minimal */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+
+    /* popup fade/slide */
+    .popup-backdrop {
+      animation: fade-in 180ms ease-out;
+    }
+    .popup-card {
+      animation: pop-in 220ms cubic-bezier(.2,.8,.2,1);
+    }
+    @keyframes fade-in {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    @keyframes pop-in {
+      from { opacity: 0; transform: translateY(8px) scale(.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* banner slide-up */
+    .banner-wrap {
+      animation: slide-up 240ms cubic-bezier(.2,.8,.2,1);
+    }
+    @keyframes slide-up {
+      from { transform: translateY(120%); }
+      to   { transform: translateY(0); }
+    }
+
+    /* toast fade */
+    .toast {
+      animation: toast-in 180ms ease-out;
+    }
+    @keyframes toast-in {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* subtle card grain */
+    .card-shadow { box-shadow: 0 1px 2px rgba(15,23,42,.04), 0 4px 18px rgba(15,23,42,.06); }
+    .popup-shadow { box-shadow: 0 24px 60px -12px rgba(15,23,42,.35); }
+
+    /* course card dashed border */
+    .ghost-card {
+      background: rgba(255,255,255,0.72);
+      border: 1px dashed #CBD5E1;
+    }
+
+    /* probability bar */
+    .prob-cell { font-variant-numeric: tabular-nums; }
+
+    /* iconed button hover */
+    .btn-primary { transition: transform .06s ease, box-shadow .12s ease; }
+    .btn-primary:active { transform: translateY(1px); }
+  </style>
+</head>
+<body class="font-sans text-ink-900 antialiased">
+
+<!-- ============================ 背景（AIO26 风格） ============================ -->
+<div class="min-h-screen flex">
+  <!-- Sidebar -->
+  <aside class="w-60 shrink-0 bg-white border-r border-ink-100 flex flex-col">
+    <div class="px-5 py-5 flex items-center gap-2">
+      <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-brand-700 grid place-items-center text-white font-bold">S</div>
+      <span class="font-semibold text-lg tracking-tight">Solvely.ai</span>
+    </div>
+    <nav class="px-2 flex-1">
+      <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium bg-brand-50 text-brand-700">
+        <span>📚</span> AI Study
+      </a>
+      <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-ink-700 hover:bg-ink-100 mt-1">
+        <span>🎯</span> Exam Predictor
+      </a>
+      <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-ink-700 hover:bg-ink-100 mt-1">
+        <span>🧮</span> AI Solver
+      </a>
+      <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-ink-700 hover:bg-ink-100 mt-1">
+        <span>🎙️</span> Live Notes
+      </a>
+      <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-ink-700 hover:bg-ink-100 mt-1">
+        <span>⋯</span> Others
+      </a>
+
+      <div class="mt-6 px-3 text-[11px] uppercase tracking-wider text-ink-500">Recent Sets</div>
+      <div class="mt-2 space-y-1 px-1">
+        <div class="flex items-center gap-2 px-2 py-1.5 rounded text-sm text-ink-700">
+          <span class="w-6 h-6 rounded bg-sky-100 grid place-items-center text-[10px] font-bold text-sky-700">BI</span> Biology 101
+        </div>
+        <div class="flex items-center gap-2 px-2 py-1.5 rounded text-sm text-ink-700">
+          <span class="w-6 h-6 rounded bg-pink-100 grid place-items-center text-[10px] font-bold text-pink-700">IP</span> Intro to Psychology
+        </div>
+        <div class="flex items-center gap-2 px-2 py-1.5 rounded text-sm text-ink-700">
+          <span class="w-6 h-6 rounded bg-orange-100 grid place-items-center text-[10px] font-bold text-orange-700">WH</span> World History
+        </div>
+        <div class="flex items-center gap-2 px-2 py-1.5 rounded text-sm text-ink-700">
+          <span class="w-6 h-6 rounded bg-emerald-100 grid place-items-center text-[10px] font-bold text-emerald-700">OC</span> Organic Chemistry
+        </div>
+        <div class="flex items-center gap-2 px-2 py-1.5 rounded text-sm text-ink-700">
+          <span class="w-6 h-6 rounded bg-indigo-100 grid place-items-center text-[10px] font-bold text-indigo-700">CS</span> CS Fundamentals
+        </div>
+        <div class="flex items-center gap-2 px-2 py-1.5 rounded text-sm text-ink-500">
+          <span class="w-6 h-6 rounded bg-ink-100 grid place-items-center text-[10px] font-bold">✕</span> Unlimited
+        </div>
+      </div>
+    </nav>
+    <div class="p-3 border-t border-ink-100 flex items-center gap-3">
+      <div class="w-8 h-8 rounded-full bg-ink-300 grid place-items-center text-xs font-semibold text-white">JD</div>
+      <div class="flex-1 text-sm">John Doe</div>
+      <span class="text-ink-500">🌙</span>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="flex-1 overflow-y-auto relative">
+    <div class="px-10 pt-10 pb-28 max-w-6xl">
+      <div class="flex items-start justify-between">
+        <div>
+          <div class="text-ink-500 text-sm">Welcome back,</div>
+          <h1 class="text-3xl font-semibold tracking-tight mt-1">John Doe</h1>
+          <p class="text-ink-500 mt-3 max-w-xl">Your All-in-One Study Hub: Upload course materials and let AI generate summaries, flashcards, and quizzes to boost your learning.</p>
+        </div>
+        <div class="flex gap-3">
+          <button class="px-4 py-2.5 rounded-lg bg-brand-500 text-white text-sm font-medium hover:bg-brand-600">＋ Create New Set</button>
+          <button class="px-4 py-2.5 rounded-lg border border-ink-300 text-sm text-ink-700 hover:bg-white">📚 Browse Library</button>
+        </div>
+      </div>
+
+      <section class="mt-10">
+        <h2 class="text-lg font-semibold">Jump Back In</h2>
+        <div class="mt-4 grid grid-cols-3 gap-4">
+          <!-- card -->
+          <div class="bg-white rounded-xl p-4 card-shadow">
+            <div class="flex items-center gap-3">
+              <span class="w-9 h-9 rounded-lg bg-sky-100 grid place-items-center text-sm font-bold text-sky-700">BI</span>
+              <div class="flex-1">
+                <div class="text-sm font-medium leading-tight">Biology 101: The Logic of Life</div>
+              </div>
+            </div>
+            <div class="mt-3">
+              <div class="text-xs text-ink-500 flex items-center justify-between">
+                <span>45% Mastery</span><span>2h ago</span>
+              </div>
+              <div class="h-1.5 bg-ink-100 rounded mt-1"><div class="h-full bg-brand-500 rounded" style="width:45%"></div></div>
+              <div class="text-xs text-ink-700 mt-2">Continue from <span class="font-medium">Cell Membrane Structure</span></div>
+            </div>
+          </div>
+          <div class="bg-white rounded-xl p-4 card-shadow">
+            <div class="flex items-center gap-3">
+              <span class="w-9 h-9 rounded-lg bg-orange-100 grid place-items-center text-sm font-bold text-orange-700">WH</span>
+              <div class="flex-1">
+                <div class="text-sm font-medium leading-tight">World History</div>
+              </div>
+            </div>
+            <div class="mt-3">
+              <div class="text-xs text-ink-500 flex items-center justify-between">
+                <span>45% Mastery</span><span>1d ago</span>
+              </div>
+              <div class="h-1.5 bg-ink-100 rounded mt-1"><div class="h-full bg-brand-500 rounded" style="width:45%"></div></div>
+              <div class="text-xs text-ink-700 mt-2">Continue from <span class="font-medium">Treaty of Versailles</span></div>
+            </div>
+          </div>
+          <div class="bg-white rounded-xl p-4 card-shadow">
+            <div class="flex items-center gap-3">
+              <span class="w-9 h-9 rounded-lg bg-emerald-100 grid place-items-center text-sm font-bold text-emerald-700">OC</span>
+              <div class="flex-1">
+                <div class="text-sm font-medium leading-tight">Organic Chemistry</div>
+              </div>
+            </div>
+            <div class="mt-3">
+              <div class="text-xs text-ink-500 flex items-center justify-between">
+                <span>45% Mastery</span><span>2d ago</span>
+              </div>
+              <div class="h-1.5 bg-ink-100 rounded mt-1"><div class="h-full bg-brand-500 rounded" style="width:45%"></div></div>
+              <div class="text-xs text-ink-700 mt-2">Continue from <span class="font-medium">Reaction Mechanisms</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mt-10">
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg font-semibold">All Study Sets</h2>
+          <div class="flex items-center gap-3 text-sm text-ink-500">
+            <span>5 Sets</span>
+            <span class="px-3 py-1.5 border border-ink-300 rounded-lg">Newest First ▾</span>
+          </div>
+        </div>
+        <div class="mt-4 grid grid-cols-3 gap-4">
+          <!-- 5 study set cards -->
+          <div class="bg-white rounded-xl p-4 card-shadow">
+            <div class="flex items-start gap-3">
+              <span class="w-9 h-9 rounded-lg bg-sky-100 grid place-items-center text-sm font-bold text-sky-700">BI</span>
+              <div class="flex-1">
+                <div class="text-sm font-medium leading-tight">Biology 101: The Logic of Life</div>
+                <div class="text-xs text-ink-500 mt-1">15% Mastery · 03/24/2026</div>
+              </div>
+            </div>
+            <div class="mt-3 text-xs text-ink-500">2 Files → 14 Topics · 64 Flashcards · 3 Quizzes</div>
+          </div>
+          <div class="bg-white rounded-xl p-4 card-shadow">
+            <div class="flex items-start gap-3">
+              <span class="w-9 h-9 rounded-lg bg-pink-100 grid place-items-center text-sm font-bold text-pink-700">IP</span>
+              <div class="flex-1">
+                <div class="text-sm font-medium leading-tight">Intro to Psychology</div>
+                <div class="text-xs text-ink-500 mt-1">15% Mastery · 03/24/2026</div>
+              </div>
+            </div>
+            <div class="mt-3 text-xs text-ink-500">2 Files → 14 Topics · 64 Flashcards · 3 Quizzes</div>
+          </div>
+          <div class="bg-white rounded-xl p-4 card-shadow">
+            <div class="flex items-start gap-3">
+              <span class="w-9 h-9 rounded-lg bg-emerald-100 grid place-items-center text-sm font-bold text-emerald-700">OC</span>
+              <div class="flex-1">
+                <div class="text-sm font-medium leading-tight">Organic Chemistry: Structure, Mechanism and Reactivity</div>
+                <div class="text-xs text-ink-500 mt-1">15% Mastery · 03/24/2026</div>
+              </div>
+            </div>
+            <div class="mt-3 text-xs text-ink-500">2 Files → 14 Topics · 64 Flashcards · 3 Quizzes</div>
+          </div>
+          <div class="bg-white rounded-xl p-4 card-shadow">
+            <div class="flex items-start gap-3">
+              <span class="w-9 h-9 rounded-lg bg-indigo-100 grid place-items-center text-sm font-bold text-indigo-700">CS</span>
+              <div class="flex-1">
+                <div class="text-sm font-medium leading-tight">CS Fundamentals</div>
+                <div class="text-xs text-ink-500 mt-1">85% Mastery · 03/24/2026</div>
+              </div>
+            </div>
+            <div class="mt-3 text-xs text-ink-500">2 Files → 14 Topics · 64 Flashcards · 3 Quizzes</div>
+          </div>
+          <div class="bg-white rounded-xl p-4 card-shadow">
+            <div class="flex items-start gap-3">
+              <span class="w-9 h-9 rounded-lg bg-orange-100 grid place-items-center text-sm font-bold text-orange-700">WH</span>
+              <div class="flex-1">
+                <div class="text-sm font-medium leading-tight">World History</div>
+                <div class="text-xs text-ink-500 mt-1">25% Mastery · 03/24/2026</div>
+              </div>
+            </div>
+            <div class="mt-3 text-xs text-ink-500">2 Files → 14 Topics · 64 Flashcards · 3 Quizzes</div>
+          </div>
+          <div class="ghost-card rounded-xl p-4 grid place-items-center text-center text-ink-500 text-sm h-[108px]">
+            <div>
+              <div class="text-2xl leading-none">＋</div>
+              <div class="mt-1">New Study Set</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============================ Banner（底部固定） ============================ -->
+    <div id="banner-root" class="fixed left-60 right-0 bottom-0 z-30 pointer-events-none" style="display:none;">
+      <div class="banner-wrap pointer-events-auto mx-auto max-w-5xl mb-5 px-5">
+        <div class="bg-white rounded-xl border border-ink-100 card-shadow p-4 flex items-center gap-4">
+          <div class="w-9 h-9 rounded-lg bg-brand-50 grid place-items-center text-brand-600 text-lg shrink-0">🎯</div>
+          <div class="flex-1 text-sm text-ink-700" id="banner-copy"></div>
+          <button class="btn-primary px-4 py-2 rounded-lg bg-brand-500 text-white text-sm font-medium hover:bg-brand-600 shrink-0" id="banner-cta"></button>
+          <button class="text-sm text-ink-500 hover:text-ink-700 shrink-0" onclick="onBannerDismiss()">Dismiss</button>
+          <button class="text-[11px] text-ink-500 hover:text-ink-700 underline underline-offset-2 shrink-0" onclick="onBannerDontShow()">Don't show again</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ============================ Popup（整屏遮罩 + 中央弹窗） ============================ -->
+<div id="popup-root" class="fixed inset-0 z-40" style="display:none;">
+  <div class="popup-backdrop absolute inset-0 bg-ink-900/60" onclick="onPopupMaybeLater()"></div>
+  <div class="absolute inset-0 flex items-center justify-center p-6 pointer-events-none">
+    <div class="popup-card popup-shadow relative bg-gradient-to-br from-brand-500 to-brand-700 rounded-3xl overflow-hidden w-[900px] max-w-full pointer-events-auto">
+      <!-- 关闭按钮 -->
+      <button class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/20 hover:bg-white/30 text-white grid place-items-center text-lg z-10" onclick="onPopupMaybeLater()">✕</button>
+
+      <!-- 上半：白色信息卡 + 右侧 3 点价值 -->
+      <div class="p-8">
+        <div class="bg-white rounded-2xl p-5 grid grid-cols-[1fr_240px] gap-4">
+          <!-- 左：课程卡 + mock/cheat + 预测题 -->
+          <div>
+            <div class="text-brand-500 text-xs font-medium">Final Exam</div>
+            <div class="text-base font-semibold mt-0.5">BIOL 1101: Intro to Biology</div>
+            <div class="text-xs text-ink-500 mt-0.5">Based on 6 materials: 4 past exams, 2 homework</div>
+
+            <div class="grid grid-cols-2 gap-3 mt-3">
+              <!-- Mock Exam -->
+              <div class="rounded-xl bg-gradient-to-br from-purple-400 to-fuchsia-500 p-3 text-white text-xs">
+                <div class="font-semibold text-[13px]">Mock Exam</div>
+                <div class="opacity-90 mt-0.5">45 min · 60 Questions · ≥90% Likely</div>
+                <div class="mt-2 h-12 rounded bg-white/20"></div>
+              </div>
+              <!-- Cheat Sheet -->
+              <div class="rounded-xl bg-gradient-to-br from-orange-400 to-rose-500 p-3 text-white text-xs">
+                <div class="font-semibold text-[13px]">Cheat Sheet</div>
+                <div class="opacity-90 mt-0.5">Every key formula and concept on one page</div>
+                <div class="mt-2 h-12 rounded bg-white/20"></div>
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <div class="text-xs font-medium text-ink-700">Predicted Exam Topics</div>
+              <div class="mt-2 rounded-lg bg-ink-100/70 divide-y divide-white">
+                <div class="flex items-center justify-between px-3 py-2 text-xs">
+                  <span>Kinematics</span><span class="text-ink-500">Probability <span class="prob-cell text-red-500 font-semibold">97%</span></span>
+                </div>
+                <div class="flex items-center justify-between px-3 py-2 text-xs">
+                  <span>Newton's Laws of Motion</span><span class="text-ink-500">Probability <span class="prob-cell text-red-500 font-semibold">94%</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 右：3 点价值（在白卡内嵌一块蓝色区） -->
+          <div class="bg-gradient-to-br from-brand-500 to-brand-700 rounded-xl p-4 text-white text-sm flex flex-col justify-center gap-3">
+            <div class="flex items-center gap-2"><span class="text-green-300">✓</span> High-probability topics</div>
+            <div class="flex items-center gap-2"><span class="text-green-300">✓</span> Narrow your review scope</div>
+            <div class="flex items-center gap-2"><span class="text-green-300">✓</span> Prepare with confidence</div>
+          </div>
+        </div>
+
+        <!-- 下半：标题 + 副标题 + CTA -->
+        <div class="mt-7 text-center text-white">
+          <div class="text-2xl font-bold" id="popup-title"></div>
+          <div class="mt-2 text-white/90 text-sm max-w-xl mx-auto" id="popup-subtitle"></div>
+          <div class="mt-5">
+            <button class="btn-primary px-7 py-3 rounded-full bg-white text-brand-600 text-sm font-semibold hover:bg-ink-100" id="popup-cta" onclick="onPopupCta()"></button>
+          </div>
+          <div class="mt-3">
+            <button class="text-white/80 text-sm hover:text-white" onclick="onPopupMaybeLater()">Maybe Later</button>
+          </div>
+          <div class="mt-1.5">
+            <button class="text-white/50 text-[11px] hover:text-white/80 underline underline-offset-2" onclick="onPopupDontShow()">Don't show again</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ 调试面板（右上角） ============================ -->
+<div class="fixed top-5 right-5 z-50 w-72">
+  <div class="bg-white rounded-xl border border-ink-100 card-shadow overflow-hidden">
+    <div class="px-4 py-3 bg-ink-900 text-white text-sm font-medium flex items-center justify-between">
+      <span>🎛️ Mockup Debug Panel</span>
+      <button class="text-white/70 text-xs hover:text-white" onclick="togglePanel()">Hide</button>
+    </div>
+    <div id="panel-body" class="p-4 space-y-4 text-sm">
+      <div>
+        <div class="text-ink-500 text-[11px] uppercase tracking-wider mb-1.5">触发源</div>
+        <div class="grid grid-cols-2 gap-1.5">
+          <button data-trigger="paywall_close" class="trigger-btn px-2 py-1.5 rounded border border-ink-300 text-xs">Paywall Close<div class="text-[10px] text-ink-500">立即</div></button>
+          <button data-trigger="stripe_fail" class="trigger-btn px-2 py-1.5 rounded border border-ink-300 text-xs">Stripe Fail<div class="text-[10px] text-ink-500">立即</div></button>
+          <button data-trigger="sub_fail" class="trigger-btn px-2 py-1.5 rounded border border-ink-300 text-xs">Sub Fail<div class="text-[10px] text-ink-500">立即</div></button>
+          <button data-trigger="cover_idle_5s" class="trigger-btn px-2 py-1.5 rounded border border-ink-300 text-xs">Cover Idle<div class="text-[10px] text-ink-500">5 秒后</div></button>
+        </div>
+      </div>
+
+      <div>
+        <div class="text-ink-500 text-[11px] uppercase tracking-wider mb-1.5">Banner 方案</div>
+        <div class="grid grid-cols-4 gap-1.5">
+          <button data-banner="off" class="banner-btn px-2 py-1.5 rounded border border-ink-300 text-xs bg-ink-100">Off</button>
+          <button data-banner="A1" class="banner-btn px-2 py-1.5 rounded border border-ink-300 text-xs">A1 ★</button>
+          <button data-banner="A2" class="banner-btn px-2 py-1.5 rounded border border-ink-300 text-xs">A2</button>
+          <button data-banner="A3" class="banner-btn px-2 py-1.5 rounded border border-ink-300 text-xs">A3</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="text-ink-500 text-[11px] uppercase tracking-wider mb-1.5">Popup 方案</div>
+        <div class="grid grid-cols-4 gap-1.5">
+          <button data-popup="off" class="popup-btn px-2 py-1.5 rounded border border-ink-300 text-xs bg-ink-100">Off</button>
+          <button data-popup="B1" class="popup-btn px-2 py-1.5 rounded border border-ink-300 text-xs">B1 ★</button>
+          <button data-popup="B2" class="popup-btn px-2 py-1.5 rounded border border-ink-300 text-xs">B2</button>
+          <button data-popup="B3" class="popup-btn px-2 py-1.5 rounded border border-ink-300 text-xs">B3</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="text-ink-500 text-[11px] uppercase tracking-wider mb-1.5">快速组合</div>
+        <div class="grid grid-cols-3 gap-1.5">
+          <button class="px-2 py-1.5 rounded bg-brand-50 text-brand-700 text-xs" onclick="quickSet('A1','B1')">A1+B1</button>
+          <button class="px-2 py-1.5 rounded bg-ink-100 text-ink-700 text-xs" onclick="quickSet('A2','B2')">A2+B2</button>
+          <button class="px-2 py-1.5 rounded bg-ink-100 text-ink-700 text-xs" onclick="quickSet('A3','B3')">A3+B3</button>
+        </div>
+      </div>
+
+      <div id="countdown-box" class="hidden text-[11px] text-amber-600 bg-amber-50 border border-amber-200 rounded p-2">
+        <span id="countdown-text">Cover idle: showing in 5s...</span>
+      </div>
+
+      <div class="text-[10px] text-ink-500 leading-relaxed pt-2 border-t border-ink-100">
+        这是 mockup，仅用于 PRD 讨论，实际实现以开发 PR 为准。<br/>★ 表示 PRD 推荐方案。
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ Toast ============================ -->
+<div id="toast-root" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] space-y-2 pointer-events-none"></div>
+
+<!-- ============================ JS ============================ -->
+<script>
+/* ---------------- 文案数据（对齐 PRD） ---------------- */
+const BANNER_VARIANTS = {
+  A1: {
+    copy: `<b>Ready for your exam?</b> Get a free preview of what's likely on your Final with Exam Predictor.`,
+    cta:  `Try Exam Predictor`,
+  },
+  A2: {
+    copy: `<b>Worried about your Final?</b> Generate your first Mock Exam free — see AI-predicted questions before you study.`,
+    cta:  `Generate My First Mock`,
+  },
+  A3: {
+    copy: `<b>Don't study blind.</b> 75% of students said Exam Predictor matched their real Final — try your first mock on us.`,
+    cta:  `Try My First Mock`,
+  },
+};
+
+const POPUP_VARIANTS = {
+  B1: {
+    title:    `🚀 Walk Into Your Exam 100% Ready`,
+    subtitle: `9 in 10 users say their grades improved. Upload your materials to see what's on your exams.`,
+    cta:      `Try My First Mock Free`,
+  },
+  B2: {
+    title:    `Don't leave empty-handed — 🚀 Walk Into Your Exam 100% Ready`,
+    subtitle: `9 in 10 users say their grades improved. Preview your first AI-predicted Mock Exam free — no commitment.`,
+    cta:      `Preview My Mock Exam`,
+  },
+  B3: {
+    title:    `Your Final is coming. Start with a free sample.`,
+    subtitle: `9 in 10 users say their grades improved. Try a free sample of your first Mock Exam — unlock the full paper if you like what you see.`,
+    cta:      `Try a Free Sample`,
+  },
+};
+
+/* ---------------- 状态 ---------------- */
+let state = {
+  trigger: 'paywall_close', // paywall_close | stripe_fail | sub_fail | cover_idle_5s
+  banner: 'off',            // off | A1 | A2 | A3
+  popup:  'off',            // off | B1 | B2 | B3
+  countdownTimer: null,
+};
+
+/* ---------------- DOM 引用 ---------------- */
+const $  = (sel) => document.querySelector(sel);
+const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+/* ---------------- 渲染 ---------------- */
+function renderBanner() {
+  const el = $('#banner-root');
+  if (state.banner === 'off') { el.style.display = 'none'; return; }
+  const v = BANNER_VARIANTS[state.banner];
+  $('#banner-copy').innerHTML = v.copy;
+  $('#banner-cta').textContent = v.cta;
+  el.style.display = 'block';
+  // restart animation
+  const wrap = el.querySelector('.banner-wrap');
+  wrap.style.animation = 'none'; void wrap.offsetWidth; wrap.style.animation = '';
+}
+
+function renderPopup() {
+  const el = $('#popup-root');
+  if (state.popup === 'off') { el.style.display = 'none'; return; }
+  const v = POPUP_VARIANTS[state.popup];
+  $('#popup-title').textContent = v.title;
+  $('#popup-subtitle').textContent = v.subtitle;
+  $('#popup-cta').textContent = v.cta;
+  el.style.display = 'block';
+  // restart animation
+  const card = el.querySelector('.popup-card');
+  card.style.animation = 'none'; void card.offsetWidth; card.style.animation = '';
+  const bd = el.querySelector('.popup-backdrop');
+  bd.style.animation = 'none'; void bd.offsetWidth; bd.style.animation = '';
+}
+
+function refreshButtons() {
+  $$('.trigger-btn').forEach(b => {
+    const sel = b.dataset.trigger === state.trigger;
+    b.classList.toggle('bg-brand-500', sel);
+    b.classList.toggle('text-white', sel);
+    b.classList.toggle('border-brand-500', sel);
+  });
+  $$('.banner-btn').forEach(b => {
+    const sel = b.dataset.banner === state.banner;
+    b.classList.toggle('bg-brand-500', sel);
+    b.classList.toggle('text-white', sel);
+    b.classList.toggle('border-brand-500', sel);
+    b.classList.toggle('bg-ink-100', !sel && b.dataset.banner === 'off');
+  });
+  $$('.popup-btn').forEach(b => {
+    const sel = b.dataset.popup === state.popup;
+    b.classList.toggle('bg-brand-500', sel);
+    b.classList.toggle('text-white', sel);
+    b.classList.toggle('border-brand-500', sel);
+    b.classList.toggle('bg-ink-100', !sel && b.dataset.popup === 'off');
+  });
+}
+
+/* ---------------- 触发逻辑（带 countdown） ---------------- */
+function applyTriggerAndRender() {
+  clearCountdown();
+  const doShow = () => { renderBanner(); renderPopup(); };
+  if (state.trigger === 'cover_idle_5s' && (state.banner !== 'off' || state.popup !== 'off')) {
+    // 5 秒倒计时后展示
+    let remain = 5;
+    $('#countdown-box').classList.remove('hidden');
+    $('#countdown-text').textContent = `Cover idle: showing in ${remain}s...`;
+    // 先隐藏
+    $('#banner-root').style.display = 'none';
+    $('#popup-root').style.display = 'none';
+    state.countdownTimer = setInterval(() => {
+      remain -= 1;
+      if (remain <= 0) {
+        clearCountdown();
+        doShow();
+      } else {
+        $('#countdown-text').textContent = `Cover idle: showing in ${remain}s...`;
+      }
+    }, 1000);
+  } else {
+    $('#countdown-box').classList.add('hidden');
+    doShow();
+  }
+}
+
+function clearCountdown() {
+  if (state.countdownTimer) { clearInterval(state.countdownTimer); state.countdownTimer = null; }
+  $('#countdown-box').classList.add('hidden');
+}
+
+/* ---------------- 交互 ---------------- */
+function onBannerDismiss() {
+  state.banner = 'off'; renderBanner(); refreshButtons();
+  toast('本次关闭 · 下次 Paywall 触发且满足条件时仍会展示');
+}
+function onBannerDontShow() {
+  state.banner = 'off'; renderBanner(); refreshButtons();
+  toast('永久关闭 · 写入 ep_guide_dismissed_permanent=true，此后不再展示', 'danger');
+}
+function onPopupMaybeLater() {
+  state.popup = 'off'; renderPopup(); refreshButtons();
+  toast('本次关闭 · 下次满足触发条件仍会展示');
+}
+function onPopupDontShow() {
+  state.popup = 'off'; renderPopup(); refreshButtons();
+  toast('永久关闭 · 写入 ep_guide_dismissed_permanent=true，此后不再展示', 'danger');
+}
+function onPopupCta() {
+  const v = POPUP_VARIANTS[state.popup];
+  toast(`跳转 EP 创建流程（CTA: ${v?.cta || ''}）`, 'success');
+  state.popup = 'off'; renderPopup(); refreshButtons();
+}
+
+/* ---------------- Toast ---------------- */
+function toast(msg, kind = 'info') {
+  const root = $('#toast-root');
+  const el = document.createElement('div');
+  const colors = {
+    info:    'bg-ink-900 text-white',
+    success: 'bg-emerald-600 text-white',
+    danger:  'bg-rose-600 text-white',
+  }[kind] || 'bg-ink-900 text-white';
+  el.className = `toast ${colors} text-sm px-4 py-2 rounded-lg shadow-lg pointer-events-auto`;
+  el.textContent = msg;
+  root.appendChild(el);
+  setTimeout(() => { el.style.opacity = '0'; el.style.transition = 'opacity 200ms'; }, 2400);
+  setTimeout(() => { el.remove(); }, 2700);
+}
+
+/* ---------------- 事件绑定 ---------------- */
+$$('.trigger-btn').forEach(b => b.addEventListener('click', () => {
+  state.trigger = b.dataset.trigger; refreshButtons(); applyTriggerAndRender();
+}));
+$$('.banner-btn').forEach(b => b.addEventListener('click', () => {
+  state.banner = b.dataset.banner; refreshButtons(); applyTriggerAndRender();
+}));
+$$('.popup-btn').forEach(b => b.addEventListener('click', () => {
+  state.popup = b.dataset.popup; refreshButtons(); applyTriggerAndRender();
+}));
+
+function quickSet(bn, pp) {
+  state.banner = bn; state.popup = pp; refreshButtons(); applyTriggerAndRender();
+}
+
+function togglePanel() {
+  const body = $('#panel-body');
+  body.classList.toggle('hidden');
+}
+
+/* ---------------- 初始化（默认展示 A1 + B1 组合） ---------------- */
+(function init() {
+  state.trigger = 'paywall_close';
+  state.banner = 'A1';
+  state.popup  = 'off';  // 默认不先弹 popup，等用户手动切
+  refreshButtons();
+  applyTriggerAndRender();
+})();
+</script>
+</body>
+</html>
