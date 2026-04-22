@@ -384,31 +384,18 @@
       </div>
 
       <div>
-        <div class="text-ink-500 text-[11px] uppercase tracking-wider mb-1.5">Banner 方案</div>
-        <div class="grid grid-cols-4 gap-1.5">
+        <div class="text-ink-500 text-[11px] uppercase tracking-wider mb-1.5">Banner</div>
+        <div class="grid grid-cols-2 gap-1.5">
           <button data-banner="off" class="banner-btn px-2 py-1.5 rounded border border-ink-300 text-xs bg-ink-100">Off</button>
-          <button data-banner="A1" class="banner-btn px-2 py-1.5 rounded border border-ink-300 text-xs">A1 ★</button>
-          <button data-banner="A2" class="banner-btn px-2 py-1.5 rounded border border-ink-300 text-xs">A2</button>
-          <button data-banner="A3" class="banner-btn px-2 py-1.5 rounded border border-ink-300 text-xs">A3</button>
+          <button data-banner="on" class="banner-btn px-2 py-1.5 rounded border border-ink-300 text-xs">On</button>
         </div>
       </div>
 
       <div>
-        <div class="text-ink-500 text-[11px] uppercase tracking-wider mb-1.5">Popup 方案</div>
-        <div class="grid grid-cols-4 gap-1.5">
+        <div class="text-ink-500 text-[11px] uppercase tracking-wider mb-1.5">Popup</div>
+        <div class="grid grid-cols-2 gap-1.5">
           <button data-popup="off" class="popup-btn px-2 py-1.5 rounded border border-ink-300 text-xs bg-ink-100">Off</button>
-          <button data-popup="B1" class="popup-btn px-2 py-1.5 rounded border border-ink-300 text-xs">B1 ★</button>
-          <button data-popup="B2" class="popup-btn px-2 py-1.5 rounded border border-ink-300 text-xs">B2</button>
-          <button data-popup="B3" class="popup-btn px-2 py-1.5 rounded border border-ink-300 text-xs">B3</button>
-        </div>
-      </div>
-
-      <div>
-        <div class="text-ink-500 text-[11px] uppercase tracking-wider mb-1.5">快速组合</div>
-        <div class="grid grid-cols-3 gap-1.5">
-          <button class="px-2 py-1.5 rounded bg-brand-50 text-brand-700 text-xs" onclick="quickSet('A1','B1')">A1+B1</button>
-          <button class="px-2 py-1.5 rounded bg-ink-100 text-ink-700 text-xs" onclick="quickSet('A2','B2')">A2+B2</button>
-          <button class="px-2 py-1.5 rounded bg-ink-100 text-ink-700 text-xs" onclick="quickSet('A3','B3')">A3+B3</button>
+          <button data-popup="on" class="popup-btn px-2 py-1.5 rounded border border-ink-300 text-xs">On</button>
         </div>
       </div>
 
@@ -430,43 +417,25 @@
 <script>
 /* ---------------- 文案数据（对齐 PRD） ---------------- */
 const BANNER_VARIANTS = {
-  A1: {
-    copy: `<b>Don't miss your free attempt?</b> Generate your first Mock Exam free — see AI-predicted questions before you study.`,
-    cta:  `Predict My Exam`,
-  },
-  A2: {
-    copy: `<b>Don't miss your free attempt?</b> Generate your first Mock Exam free — see AI-predicted questions before you study.`,
-    cta:  `Predict My Exam`,
-  },
-  A3: {
+  on: {
     copy: `<b>Don't miss your free attempt?</b> Generate your first Mock Exam free — see AI-predicted questions before you study.`,
     cta:  `Predict My Exam`,
   },
 };
 
 const POPUP_VARIANTS = {
-  B1: {
+  on: {
     title:    `Don't miss out on your free chance to get ahead`,
     subtitle: `9 in 10 users say their grades improved. Upload your materials to see what's on your exams.`,
-    cta:      `Predict My Exam`,
-  },
-  B2: {
-    title:    `Don't miss out on your free chance to get ahead`,
-    subtitle: `9 in 10 users say their grades improved. Preview your first AI-predicted Mock Exam free — no commitment.`,
-    cta:      `Predict My Exam`,
-  },
-  B3: {
-    title:    `Don't miss out on your free chance to get ahead`,
-    subtitle: `9 in 10 users say their grades improved. Try a free sample of your first Mock Exam — unlock the full paper if you like what you see.`,
     cta:      `Predict My Exam`,
   },
 };
 
 /* ---------------- 状态 ---------------- */
 let state = {
-  trigger: 'paywall_close', // paywall_close | stripe_fail | sub_fail | cover_idle_5s
-  banner: 'off',            // off | A1 | A2 | A3
-  popup:  'off',            // off | B1 | B2 | B3
+  trigger: 'paywall_close',
+  banner: 'off',
+  popup:  'off',
   countdownTimer: null,
 };
 
@@ -478,11 +447,10 @@ const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 function renderBanner() {
   const el = $('#banner-root');
   if (state.banner === 'off') { el.style.display = 'none'; return; }
-  const v = BANNER_VARIANTS[state.banner];
+  const v = BANNER_VARIANTS['on'];
   $('#banner-copy').innerHTML = v.copy;
   $('#banner-cta').textContent = v.cta;
   el.style.display = 'block';
-  // restart animation
   const wrap = el.querySelector('.banner-wrap');
   wrap.style.animation = 'none'; void wrap.offsetWidth; wrap.style.animation = '';
 }
@@ -490,12 +458,11 @@ function renderBanner() {
 function renderPopup() {
   const el = $('#popup-root');
   if (state.popup === 'off') { el.style.display = 'none'; return; }
-  const v = POPUP_VARIANTS[state.popup];
+  const v = POPUP_VARIANTS['on'];
   $('#popup-title').textContent = v.title;
   $('#popup-subtitle').textContent = v.subtitle;
   $('#popup-cta').textContent = v.cta;
   el.style.display = 'block';
-  // restart animation
   const card = el.querySelector('.popup-card');
   card.style.animation = 'none'; void card.offsetWidth; card.style.animation = '';
   const bd = el.querySelector('.popup-backdrop');
@@ -619,8 +586,8 @@ function togglePanel() {
 /* ---------------- 初始化（默认展示 A1 + B1 组合） ---------------- */
 (function init() {
   state.trigger = 'paywall_close';
-  state.banner = 'A1';
-  state.popup  = 'off';  // 默认不先弹 popup，等用户手动切
+  state.banner = 'on';
+  state.popup  = 'off';
   refreshButtons();
   applyTriggerAndRender();
 })();
