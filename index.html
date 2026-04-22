@@ -289,8 +289,7 @@
           <div class="w-9 h-9 rounded-lg bg-brand-50 grid place-items-center text-brand-600 text-lg shrink-0">🎯</div>
           <div class="flex-1 text-sm text-ink-700" id="banner-copy"></div>
           <button class="btn-primary px-4 py-2 rounded-lg bg-brand-500 text-white text-sm font-medium hover:bg-brand-600 shrink-0" id="banner-cta"></button>
-          <button class="text-sm text-ink-500 hover:text-ink-700 shrink-0" onclick="onBannerDismiss()">Dismiss</button>
-          <button class="text-[11px] text-ink-500 hover:text-ink-700 underline underline-offset-2 shrink-0" onclick="onBannerDontShow()">Don't show again</button>
+          <button class="text-sm text-ink-500 hover:text-ink-700 shrink-0" onclick="onBannerDismiss()">Not Now</button>
         </div>
       </div>
     </div>
@@ -358,10 +357,7 @@
             <button class="btn-primary px-7 py-3 rounded-full bg-white text-brand-600 text-sm font-semibold hover:bg-ink-100" id="popup-cta" onclick="onPopupCta()"></button>
           </div>
           <div class="mt-3">
-            <button class="text-white/80 text-sm hover:text-white" onclick="onPopupMaybeLater()">Maybe Later</button>
-          </div>
-          <div class="mt-1.5">
-            <button class="text-white/50 text-[11px] hover:text-white/80 underline underline-offset-2" onclick="onPopupDontShow()">Don't show again</button>
+            <button class="text-white/80 text-sm hover:text-white" onclick="onPopupMaybeLater()">Not Now</button>
           </div>
         </div>
       </div>
@@ -436,33 +432,33 @@
 const BANNER_VARIANTS = {
   A1: {
     copy: `<b>Ready for your exam?</b> Get a free preview of what's likely on your Final with Exam Predictor.`,
-    cta:  `Try Exam Predictor`,
+    cta:  `Predict My Exam`,
   },
   A2: {
     copy: `<b>Worried about your Final?</b> Generate your first Mock Exam free — see AI-predicted questions before you study.`,
-    cta:  `Generate My First Mock`,
+    cta:  `Predict My Exam`,
   },
   A3: {
     copy: `<b>Don't study blind.</b> 75% of students said Exam Predictor matched their real Final — try your first mock on us.`,
-    cta:  `Try My First Mock`,
+    cta:  `Predict My Exam`,
   },
 };
 
 const POPUP_VARIANTS = {
   B1: {
-    title:    `🚀 Walk Into Your Exam 100% Ready`,
+    title:    `Don't miss out on your free chance to get ahead`,
     subtitle: `9 in 10 users say their grades improved. Upload your materials to see what's on your exams.`,
-    cta:      `Try My First Mock Free`,
+    cta:      `Predict My Exam`,
   },
   B2: {
-    title:    `Don't leave empty-handed — 🚀 Walk Into Your Exam 100% Ready`,
+    title:    `Don't miss out on your free chance to get ahead`,
     subtitle: `9 in 10 users say their grades improved. Preview your first AI-predicted Mock Exam free — no commitment.`,
-    cta:      `Preview My Mock Exam`,
+    cta:      `Predict My Exam`,
   },
   B3: {
-    title:    `Your Final is coming. Start with a free sample.`,
+    title:    `Don't miss out on your free chance to get ahead`,
     subtitle: `9 in 10 users say their grades improved. Try a free sample of your first Mock Exam — unlock the full paper if you like what you see.`,
-    cta:      `Try a Free Sample`,
+    cta:      `Predict My Exam`,
   },
 };
 
